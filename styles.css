@@ -5,11 +5,56 @@
   padding: 0;
 }
 
+:root {
+  --bg-page:        #f0f4f8;
+  --bg-section:     #ffffff;
+  --bg-input:       #fafafa;
+  --bg-input-focus: #ffffff;
+  --text-primary:   #333333;
+  --text-heading:   #1a1a2e;
+  --text-label:     #555555;
+  --text-meta:      #888888;
+  --text-empty:     #aaaaaa;
+  --border-color:   #d1d5db;
+  --shadow-card:    rgba(0,0,0,0.08);
+  --shadow-section: rgba(0,0,0,0.06);
+  --shadow-item:    rgba(0,0,0,0.06);
+  --badge-bg:       #e0e7ff;
+  --badge-color:    #4338ca;
+  --btn-clear-bg:   #fee2e2;
+  --btn-clear-color:#b91c1c;
+  --btn-clear-hover:#fecaca;
+  --btn-delete-color:#aaaaaa;
+}
+
+body.dark {
+  --bg-page:        #0f172a;
+  --bg-section:     #1e293b;
+  --bg-input:       #273549;
+  --bg-input-focus: #2d3f57;
+  --text-primary:   #e2e8f0;
+  --text-heading:   #f1f5f9;
+  --text-label:     #94a3b8;
+  --text-meta:      #64748b;
+  --text-empty:     #475569;
+  --border-color:   #334155;
+  --shadow-card:    rgba(0,0,0,0.3);
+  --shadow-section: rgba(0,0,0,0.25);
+  --shadow-item:    rgba(0,0,0,0.2);
+  --badge-bg:       #312e81;
+  --badge-color:    #a5b4fc;
+  --btn-clear-bg:   #3b1f1f;
+  --btn-clear-color:#fca5a5;
+  --btn-clear-hover:#4c2626;
+  --btn-delete-color:#64748b;
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f0f4f8;
-  color: #333;
+  background: var(--bg-page);
+  color: var(--text-primary);
   min-height: 100vh;
+  transition: background 0.3s, color 0.3s;
 }
 
 /* ===== Container ===== */
@@ -19,18 +64,41 @@ body {
   padding: 2rem 1rem 4rem;
 }
 
-h1 {
-  text-align: center;
-  font-size: 2rem;
+/* ===== Header ===== */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 1.5rem;
-  color: #1a1a2e;
+}
+
+h1 {
+  font-size: 2rem;
+  color: var(--text-heading);
   letter-spacing: 1px;
+}
+
+.btn-dark-mode {
+  padding: 0.45rem 0.9rem;
+  background: var(--bg-section);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.btn-dark-mode:hover {
+  background: var(--bg-input);
 }
 
 h2 {
   font-size: 1.1rem;
   margin-bottom: 1rem;
-  color: #1a1a2e;
+  color: var(--text-heading);
 }
 
 /* ===== Summary Cards ===== */
@@ -68,11 +136,11 @@ h2 {
 
 /* ===== Form Section ===== */
 .form-section {
-  background: #fff;
+  background: var(--bg-section);
   border-radius: 12px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px var(--shadow-section);
 }
 
 .form-group {
@@ -85,24 +153,25 @@ h2 {
   font-size: 0.85rem;
   font-weight: 600;
   margin-bottom: 0.3rem;
-  color: #555;
+  color: var(--text-label);
 }
 
 .form-group input,
 .form-group select {
   padding: 0.55rem 0.75rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   font-size: 0.95rem;
   outline: none;
-  transition: border-color 0.2s;
-  background: #fafafa;
+  transition: border-color 0.2s, background 0.2s;
+  background: var(--bg-input);
+  color: var(--text-primary);
 }
 
 .form-group input:focus,
 .form-group select:focus {
   border-color: #4f46e5;
-  background: #fff;
+  background: var(--bg-input-focus);
 }
 
 .btn-add {
@@ -123,11 +192,11 @@ h2 {
 
 /* ===== Filter Section ===== */
 .filter-section {
-  background: #fff;
+  background: var(--bg-section);
   border-radius: 12px;
   padding: 1.5rem 1.5rem 1rem;
   margin-bottom: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px var(--shadow-section);
 }
 
 .filters {
@@ -141,24 +210,25 @@ h2 {
 .filters select {
   flex: 1 1 140px;
   padding: 0.5rem 0.75rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   font-size: 0.9rem;
   outline: none;
-  background: #fafafa;
-  transition: border-color 0.2s;
+  background: var(--bg-input);
+  color: var(--text-primary);
+  transition: border-color 0.2s, background 0.2s;
 }
 
 .filters input:focus,
 .filters select:focus {
   border-color: #4f46e5;
-  background: #fff;
+  background: var(--bg-input-focus);
 }
 
 .btn-clear-all {
   padding: 0.5rem 1rem;
-  background: #fee2e2;
-  color: #b91c1c;
+  background: var(--btn-clear-bg);
+  color: var(--btn-clear-color);
   border: none;
   border-radius: 8px;
   font-size: 0.9rem;
@@ -167,7 +237,7 @@ h2 {
   transition: background 0.2s;
 }
 
-.btn-clear-all:hover { background: #fecaca; }
+.btn-clear-all:hover { background: var(--btn-clear-hover); }
 
 /* ===== Transaction List ===== */
 .transaction-list {
@@ -181,10 +251,10 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #fff;
+  background: var(--bg-section);
   border-radius: 10px;
   padding: 0.9rem 1.2rem;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  box-shadow: 0 1px 4px var(--shadow-item);
   border-left: 5px solid transparent;
   transition: transform 0.1s;
 }
@@ -208,15 +278,15 @@ h2 {
 
 .transaction-meta {
   font-size: 0.78rem;
-  color: #888;
+  color: var(--text-meta);
   display: flex;
   gap: 0.5rem;
 }
 
 .category-badge {
   display: inline-block;
-  background: #e0e7ff;
-  color: #4338ca;
+  background: var(--badge-bg);
+  color: var(--badge-color);
   border-radius: 4px;
   padding: 0.05rem 0.4rem;
   font-size: 0.72rem;
@@ -243,7 +313,7 @@ h2 {
 .btn-delete {
   background: none;
   border: none;
-  color: #aaa;
+  color: var(--btn-delete-color);
   font-size: 1.1rem;
   cursor: pointer;
   line-height: 1;
@@ -254,19 +324,25 @@ h2 {
 
 .btn-delete:hover {
   color: #dc2626;
-  background: #fee2e2;
+  background: var(--btn-clear-bg);
 }
 
 /* ===== Empty Message ===== */
 .empty-msg {
   text-align: center;
-  color: #aaa;
+  color: var(--text-empty);
   font-size: 0.95rem;
   margin-top: 1.5rem;
 }
 
 /* ===== Responsive ===== */
 @media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
   .summary {
     grid-template-columns: 1fr;
   }

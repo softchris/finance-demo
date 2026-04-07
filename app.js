@@ -25,6 +25,38 @@ const searchInput      = document.getElementById('search');
 const filterType       = document.getElementById('filter-type');
 const filterCategory   = document.getElementById('filter-category');
 const btnClearAll      = document.getElementById('btn-clear-all');
+const btnDarkMode      = document.getElementById('btn-dark-mode');
+
+// ─── Dark Mode ────────────────────────────────────────────────────────────────
+function applyDarkMode(isDark) {
+  if (isDark) {
+    document.body.classList.add('dark');
+    btnDarkMode.textContent = '☀️ Light Mode';
+  } else {
+    document.body.classList.remove('dark');
+    btnDarkMode.textContent = '🌙 Dark Mode';
+  }
+}
+
+(function initDarkMode() {
+  const stored = localStorage.getItem('ft_dark_mode');
+  const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+  const isDark = stored !== null ? stored === 'true' : mediaQuery.matches;
+  applyDarkMode(isDark);
+
+  // Automatically follow system preference changes when user hasn't set a manual preference
+  mediaQuery.addEventListener('change', function (e) {
+    if (localStorage.getItem('ft_dark_mode') === null) {
+      applyDarkMode(e.matches);
+    }
+  });
+})();
+
+btnDarkMode.addEventListener('click', function () {
+  const isDark = !document.body.classList.contains('dark');
+  applyDarkMode(isDark);
+  localStorage.setItem('ft_dark_mode', isDark);
+});
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 function formatCurrency(value) {
